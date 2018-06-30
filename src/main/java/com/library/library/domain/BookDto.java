@@ -4,14 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 public class BookDto {
     private Long id;
     private String author;
     private String title;
-    private int publicationYear;
-    private int status;
+    private Integer publicationYear;
+    private Integer status;
 }

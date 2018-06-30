@@ -3,7 +3,6 @@ package com.library.library.service;
 import com.library.library.domain.Book;
 import com.library.library.repository.LibraryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

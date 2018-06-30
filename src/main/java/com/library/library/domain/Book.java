@@ -21,7 +21,7 @@ public class Book {
     @Column
     private String title;
 
-    @Column
+    @Column(name = "publication_year")
     private int publicationYear;
 
     @Column
