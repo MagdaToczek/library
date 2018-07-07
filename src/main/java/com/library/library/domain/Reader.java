@@ -1,6 +1,5 @@
 package com.library.library.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,26 +12,30 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Entity(name = "copy_of_book")
-public class CopyOfBook {
+@Entity(name = "readers")
+public class Reader {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @Column
-    private int status;
+    private String firstname;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "book_id")
-    @JsonBackReference
-    private Book book;
+    @Column
+    private String lastname;
+
+    @Column
+    private String email;
+
+    @Column
+    private String phone;
 
     @OneToMany(
             targetEntity = Rental.class,
-            mappedBy = "copyOfBook",
+            mappedBy = "reader",
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER
     )
     @JsonManagedReference
-    List<Rental> rentalsList = new ArrayList<>();
+    private List<Rental> rentalsList = new ArrayList<>();
 }

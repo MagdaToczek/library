@@ -1,13 +1,12 @@
 package com.library.library.controller;
 
-import com.library.library.domain.Book;
 import com.library.library.domain.BookDto;
+import com.library.library.domain.CopyOfBookDto;
 import com.library.library.mapper.Mapper;
 import com.library.library.service.DbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -37,7 +36,24 @@ public class LibraryController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "books")
-    public BookDto updateBookStatus(@RequestBody BookDto bookDto) {
+    public BookDto updateBook(@RequestBody BookDto bookDto) {
         return mapper.mapToBookDto(dbService.saveBook(mapper.mapToBook(bookDto)));
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "books/{author}")
+    public List<BookDto> getBooksByAuthor(@PathVariable String author) { return mapper.mapToBookDtoList(dbService.getBooksByAuthor(author));}
+
+    @RequestMapping(method = RequestMethod.GET, value = "books/{title}")
+    public List<BookDto> getBooksByTitle(@PathVariable String title) { return mapper.mapToBookDtoList(dbService.getBooksByTitle(title));}
+
+    @RequestMapping(method = RequestMethod.POST, value = "copyOfBook", consumes = APPLICATION_JSON_VALUE)
+    public void createCopyOfBook(@RequestBody CopyOfBookDto copyOfBookDto) { dbService.saveCopyOfBook(mapper.mapToCopyOfBook(copyOfBookDto));}
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "copyOfBook/{id}")
+    public void deleteCopyOfBook(@PathVariable Long id) { dbService.deleteCopyOfBook(id);}
+
+    @RequestMapping(method = RequestMethod.PUT, value = "copyOfBook")
+    public CopyOfBookDto updateCopyOfBook(@RequestBody CopyOfBookDto copyOfBookDto) {
+        return mapper.mapToCopyOfBookDto(dbService.saveCopyOfBook(mapper.mapToCopyOfBook(copyOfBookDto)));
     }
 }

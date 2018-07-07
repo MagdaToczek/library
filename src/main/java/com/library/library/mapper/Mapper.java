@@ -2,6 +2,8 @@ package com.library.library.mapper;
 
 import com.library.library.domain.Book;
 import com.library.library.domain.BookDto;
+import com.library.library.domain.CopyOfBook;
+import com.library.library.domain.CopyOfBookDto;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -21,5 +23,13 @@ public class Mapper {
         return bookList.stream()
                 .map(b -> new BookDto(b.getId(), b.getAuthor(), b.getTitle(), b.getPublicationYear(), b.getAllCopiesOfBook()))
                 .collect(Collectors.toList());
+    }
+
+    public CopyOfBook mapToCopyOfBook(final CopyOfBookDto copyOfBookDto) {
+        return new CopyOfBook(copyOfBookDto.getId(), copyOfBookDto.getStatus(), copyOfBookDto.getBook(), copyOfBookDto.getRentalsList());
+    }
+
+    public CopyOfBookDto mapToCopyOfBookDto(final CopyOfBook copyOfBook) {
+        return new CopyOfBookDto(copyOfBook.getId(), copyOfBook.getStatus(), copyOfBook.getBook(), copyOfBook.getRentalsList());
     }
 }
