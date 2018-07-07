@@ -1,5 +1,6 @@
 package com.library.library.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,19 +27,12 @@ public class Book {
     @Column(name = "publication_year")
     private int publicationYear;
 
-    private List<CopyOfBook> allCopiesOfBook = new ArrayList<>();
-
     @OneToMany(
             targetEntity = CopyOfBook.class,
             mappedBy = "book",
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER
     )
-    public List<CopyOfBook> getAllCopiesOfBook() {
-        return allCopiesOfBook;
-    }
-
-    public void setAllCopiesOfBook(List<CopyOfBook> allCopiesOfBook) {
-        this.allCopiesOfBook = allCopiesOfBook;
-    }
+    @JsonManagedReference
+    private List<CopyOfBook> allCopiesOfBook = new ArrayList<>();
 }

@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -12,4 +14,5 @@ public class BookDto {
     private String author;
     private String title;
     private Integer publicationYear;
+    private List<CopyOfBook> allCopiesOfBook;
 }
