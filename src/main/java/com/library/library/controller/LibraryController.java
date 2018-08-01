@@ -41,11 +41,11 @@ public class LibraryController {
         return mapper.mapToBookDto(dbService.saveBook(mapper.mapToBook(bookDto)));
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "books")
-    public List<BookDto> getBooksByAuthor(@RequestParam String author) { return mapper.mapToBookDtoList(dbService.getBooksByAuthor(author));}
+    @RequestMapping(method = RequestMethod.GET, value = "books/authors/{author}")
+    public List<BookDto> getBooksByAuthor(@PathVariable String author) { return mapper.mapToBookDtoList(dbService.getBooksByAuthor(author));}
 
-    @RequestMapping(method = RequestMethod.GET, value = "books")
-    public List<BookDto> getBooksByTitle(@RequestParam String title) { return mapper.mapToBookDtoList(dbService.getBooksByTitle(title));}
+    @RequestMapping(method = RequestMethod.GET, value = "books/titles/{title}")
+    public List<BookDto> getBooksByTitle(@PathVariable String title) { return mapper.mapToBookDtoList(dbService.getBooksByTitle(title));}
 
     @RequestMapping(method = RequestMethod.POST, value = "copyOfBook", consumes = APPLICATION_JSON_VALUE)
     public void createCopyOfBook(@RequestBody CopyOfBookDto copyOfBookDto) { dbService.saveCopyOfBook(mapper.mapToCopyOfBook(copyOfBookDto));}
